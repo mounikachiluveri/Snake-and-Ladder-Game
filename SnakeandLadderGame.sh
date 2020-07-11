@@ -4,7 +4,6 @@ NO_PLAY=0
 LADDER=1
 SNAKE=2
 positionOfPlayer=0
-chance=1
 WINNING_POSITION=100
 dieResult=0
 checkOptions=0
@@ -41,20 +40,31 @@ numberOfTimesDiceroll=0
 
     function switchToPlayer()
                            {
+                               chance=1
                                while [ $positionOfPlayer -le $WINNING_POSITION ]
                                do
                                       ((numberOfTimesDiceroll++))
                                           if [ $chance -eq 1 ]
                                           then
                                            diceRoll
-                                            echo "Player position" $positionOfPlayer
+                                            echo "Player1 position :" $positionOfPlayer
                                                      if [ $positionOfPlayer -eq $WINNING_POSITION ]
                                                      then
-
-                                                             echo "player win"
-                                                      break
+                                                                         echo "player1 win"
+                                                     break
+                                                           chance=2
+                                          else
+                                             diceRoll
+                                             echo "Player2 position" $positionOfPlayer
+                                                    if [ $positionOfPlayer -eq $WINNING_POSITION ]
+                                                    then
+                                                           echo "player2 win"
+                                                    break
+                                                    fi
+                                                              chance=1
                                                       fi
-                                        fi
+                                          fi
+
                             done
                          }
 switchToPlayer
