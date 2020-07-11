@@ -9,7 +9,8 @@ WINNING_POSITION=100
 dieResult=0
 checkOptions=0
 POSITION=0
-     function diceRoll()
+numberOfTimesDiceroll=0
+    function diceRoll()
                         {
                           dieResult=$((RANDOM % 6 + 1))
                           checkOptions=$((RANDOM % 3))
@@ -42,8 +43,9 @@ POSITION=0
                            {
                                while [ $positionOfPlayer -le $WINNING_POSITION ]
                                do
-                                       if [ $chance -eq 1 ]
-                                       then
+                                      ((numberOfTimesDiceroll++))
+                                          if [ $chance -eq 1 ]
+                                          then
                                            diceRoll
                                             echo "Player position" $positionOfPlayer
                                                      if [ $positionOfPlayer -eq $WINNING_POSITION ]
@@ -52,7 +54,9 @@ POSITION=0
                                                              echo "player win"
                                                       break
                                                       fi
-                                     fi
+                                        fi
                             done
                          }
 switchToPlayer
+echo "Numberoftimesdiesrolled=" $numberOfTimesDiceroll
+
