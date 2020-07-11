@@ -4,26 +4,49 @@ NO_PLAY=0
 LADDER=1
 SNAKE=2
 positionOfPlayer=0
+chance=1
+WINNING_POSITION=100
+dieResult=0
+checkOptions=0
 POSITION=0
-               function diceRoll()
-                  {
-                        while((1))
-                        do
+     function diceRoll()
+                        {
                           dieResult=$((RANDOM % 6 + 1))
                           checkOptions=$((RANDOM % 3))
                                    case $checkOptions in
-                                        $NO_PLAY)
+                                         $NO_PLAY)
                                                    positionOfPlayer=$((positionOfPlayer+0));;
-                                        $LADDER)
+                                         $LADDER)
 
                                                    positionOfPlayer=$((positionOfPlayer+$dieResult));;
-                                        $SNAKE)
+                                         $SNAKE)
 
-                                                   positionOfPlayer=$((positionOfPlayer-$dieResult));;
-                                     esac
+                                              if [ $((positionOfPlayer-$dieResult)) -lt $POSITION ]
+                                              then
+                                                   positionOfPlayer=$POSITION
+                                              else
+                                                   positionOfPlayer=$((positionOfPlayer-$dieResult))
+                                              fi;;
+                                   esac
 
-                                  echo "positionOfPlayer:$positionOfPlayer"
-                    done
-                  }
+                         }
 
-              diceRoll
+
+    function switchToPlayer()
+                           {
+                               while [ $positionOfPlayer -le $WINNING_POSITION ]
+                               do
+                                       if [ $chance -eq 1 ]
+                                       then
+                                           diceRoll
+                                            echo "Player1 position" $positionOfPlayer
+                                                     if [ $positionOfPlayer -eq $WINNING_POSITION ]
+                                                     then
+
+                                                             echo "player1 win"
+                                                      break
+                                                      fi
+                                     fi
+                            done
+                         }
+switchToPlayer
