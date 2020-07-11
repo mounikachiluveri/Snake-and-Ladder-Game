@@ -18,15 +18,21 @@ POSITION=0
                                                    positionOfPlayer=$((positionOfPlayer+0));;
                                          $LADDER)
 
-                                                   positionOfPlayer=$((positionOfPlayer+$dieResult));;
+                                                    if [ $((positionOfPlayer+$dieResult)) -gt $WINNING_POSITION ]
+                                                    then
+                                                            positionOfPlayer=$((positionOfPlayer-$dieResult))
+                                                    else
+                                                            positionOfPlayer=$((positionOfPlayer+$dieResult))
+                                                    fi;;
+
                                          $SNAKE)
 
-                                              if [ $((positionOfPlayer-$dieResult)) -lt $POSITION ]
-                                              then
-                                                   positionOfPlayer=$POSITION
-                                              else
-                                                   positionOfPlayer=$((positionOfPlayer-$dieResult))
-                                              fi;;
+                                                    if [ $((positionOfPlayer-$dieResult)) -lt $POSITION ]
+                                                    then
+                                                           positionOfPlayer=$POSITION
+                                                    else
+                                                           positionOfPlayer=$((positionOfPlayer-$dieResult))
+                                                    fi;;
                                    esac
 
                          }
@@ -39,11 +45,11 @@ POSITION=0
                                        if [ $chance -eq 1 ]
                                        then
                                            diceRoll
-                                            echo "Player1 position" $positionOfPlayer
+                                            echo "Player position" $positionOfPlayer
                                                      if [ $positionOfPlayer -eq $WINNING_POSITION ]
                                                      then
 
-                                                             echo "player1 win"
+                                                             echo "player win"
                                                       break
                                                       fi
                                      fi
